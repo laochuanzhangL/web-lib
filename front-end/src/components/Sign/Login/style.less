@@ -1,0 +1,47 @@
+.login_wrap {
+  margin: 150px auto;
+  border: 1px solid gray;
+  width: 350px;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 5px;
+  .login_top {
+    font-size: 25px;
+  }
+
+  .ant-radio-checked .ant-radio-inner {
+    border-color: rgb(0, 149, 122) !important;
+  }
+  .ant-radio-checked::after {
+    border: 1px solid rgb(0, 149, 122) !important;
+  }
+  .ant-radio-inner::after {
+    background-color: rgb(0, 149, 122) !important;
+  }
+  .login_container {
+    width: 80%;
+    height: 80%;
+    .login-form-button {
+      width: 100%;
+      background: rgb(0, 149, 122);
+    }
+    a {
+      color: rgb(0, 149, 122) !important;
+    }
+    #components-form-demo-normal-login .login-form {
+      max-width: 300px;
+    }
+    #components-form-demo-normal-login .login-form-forgot {
+      float: right;
+    }
+    #components-form-demo-normal-login .ant-col-rtl .login-form-forgot {
+      float: left;
+    }
+    #components-form-demo-normal-login .login-form-button {
+      width: 100%;
+    }
+  }
+}
