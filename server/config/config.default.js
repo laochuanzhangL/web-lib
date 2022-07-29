@@ -38,7 +38,7 @@ module.exports = (appInfo) => {
     defaultViewEngine: "nunjucks",
   }
   config.jwt = {
-    secret: "021023",
+    secret: "",
 
     match: [/^\/shelf/],
   }
@@ -46,13 +46,13 @@ module.exports = (appInfo) => {
     // database configuration
     client: {
       // host
-      host: "124.222.80.162",
+      host: "",
       // port
       port: "3306",
       // username
-      user: "web-lib",
+      user: "",
       // password
-      password: "021023",
+      password: "",
       // database
       database: "web-lib",
     },
