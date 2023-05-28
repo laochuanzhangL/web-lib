@@ -25,6 +25,8 @@ class HttpUtil {
   getShelf = (params) => httpReq("post", "/book/shelf", params)
   //修改书架书籍数量
   amountChange = (params) => httpReq("post", "/book/shelf/amountchange", params)
+  //删除书架数量
+  deleteShelf = (params) => httpReq("post", "/book/shelf/delete", params)
   //获得已选书籍的价格和数量
   getmessage = (params) => httpReq("post", "/book/shelf/getmessage", params)
   //得到所有用户信息

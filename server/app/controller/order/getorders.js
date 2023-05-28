@@ -2,11 +2,13 @@ const Controller = require("egg").Controller
 
 class getorders extends Controller {
   async index() {
-    const username = this.ctx.request.body.username
+    const userId = this.ctx.request.body.userId
     const results = await this.app.mysql.select("orders", {
-      username: username,
+      where: {
+        userId,
+      },
     })
-
+    console.log(userId, results)
     this.ctx.body = {
       message: "订单获取成功",
       orders: results,

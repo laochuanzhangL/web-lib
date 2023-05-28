@@ -2,23 +2,25 @@ const Controller = require("egg").Controller
 
 class loginController extends Controller {
   async index() {
-    let query = this.ctx.request.body
+    const query = this.ctx.request.body
     const username = query.username
     const password = query.password
-    console.log(query)
     const res = await this.app.mysql.select("users", {
       where: {
-        username: username,
+        username,
+        password,
       },
     })
     if (res.length > 0) {
-      const secret = this.app.config.jwt.secret
-      const token = this.ctx.helper.getToken({ username }, secret)
-
-      console.log(token)
+      const token = this.ctx.helper.getToken({
+        username,
+        userId: res.userId,
+        exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+      })
       this.ctx.body = {
         token,
         status: 1,
+        userId: res[0].userId,
         message: "登录成功",
       }
     } else {

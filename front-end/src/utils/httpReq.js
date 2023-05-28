@@ -10,11 +10,16 @@ import { message } from "antd"
 const instance = axios.create({
   baseURL: "/api",
 })
+instance.interceptors.request.use((config) => {
+  const token = sessionStorage.getItem("token")
+  config.headers.common["Authorization"] = "Bearer " + token // 留意这里的 Authorization
+  return config
+})
+
 // 添加返回拦截器，直接获取返回内容的data
 instance.interceptors.response.use((res) => {
   return res
 })
-const { token } = localStorage
 
 // 封装axios方法，并导出httpReq为新的请求工具
 export const httpReq = (method, url, data, resType) => {
@@ -24,9 +29,6 @@ export const httpReq = (method, url, data, resType) => {
       url: url,
       data: data,
       responseType: resType,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
     }).then(
       (data) => {
         resolve(data)
@@ -40,7 +42,8 @@ export const httpReq = (method, url, data, resType) => {
         // 根据状态码做提示处理
         switch (status) {
           case 401:
-            message.error(`认证失败: ${errInfo}`)
+            message.error(errInfo)
+            console.log(errInfo)
             break
           case 403:
             message.error(`未授权: ${errInfo}`)

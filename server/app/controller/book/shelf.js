@@ -2,11 +2,9 @@ const Controller = require("egg").Controller
 
 class shelf extends Controller {
   async index() {
-    const username = this.ctx.request.body.username
+    const query = this.ctx.request.body
     const res = await this.app.mysql.select("bookshelf", {
-      where: {
-        username: username,
-      },
+      where: query,
     })
     this.ctx.body = res
   }
@@ -17,23 +15,23 @@ class shelf extends Controller {
       const result = await this.app.mysql.update(
         "bookshelf",
         {
-          amount: amount,
+          amount,
         },
         {
           where: {
-            title: title,
-            username: username,
+            title,
+            username,
           },
         }
       )
       const updateSuccess = result.affectedRows === 1
       this.ctx.body = {
-        updateSuccess: updateSuccess,
+        updateSuccess,
       }
     } else {
       const result = await this.app.mysql.delete("bookshelf", {
-        title: title,
-        username: username,
+        title,
+        username,
       })
       this.ctx.body = {
         isDelete: true,
@@ -42,13 +40,13 @@ class shelf extends Controller {
   }
   async getmessage() {
     const keys = this.ctx.request.body.key
-    var money = 0
-    var count = 0
+    let money = 0
+    let count = 0
     if (Array.isArray(keys)) {
-      for (let key of keys) {
+      for (const key of keys) {
         const res = await this.app.mysql.select("bookshelf", {
           where: {
-            key: key,
+            key,
           },
         })
         if (res.length > 0) {
@@ -70,8 +68,8 @@ class shelf extends Controller {
       count = count + amount
     }
     this.ctx.body = {
-      money: money,
-      count: count,
+      money,
+      count,
     }
   }
 }

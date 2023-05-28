@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react"
-import { BrowserRouter, Route, Switch, HashRouter } from "react-router-dom"
-import Index from "./components/Index"
-import Sign from "./components/Sign"
-import Manager from './components/manager'
+import { BrowserRouter, Route, Switch } from "react-router-dom"
+import Index from "./pages/Index"
+import Sign from "./pages/Sign"
+import Manager from './pages/Manager'
 import "antd/dist/antd.css"
 export default class App extends Component {
   render() {
